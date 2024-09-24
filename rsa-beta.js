@@ -23,7 +23,7 @@
                     {
                         opcode: 'encrypt',
                         blockType: Scratch.BlockType.REPORTER,
-                        text: 'Encrypt [TEXT] with [TYPE] key [KEY]',
+                        text: 'Encrypt [TEXT] with public key [KEY] swapped: [TYPE]',
                         arguments: {
                             TEXT: {
                                 type: Scratch.ArgumentType.STRING,
@@ -34,8 +34,8 @@
                                 defaultValue: ''
                             },
                             TYPE: {
-                                type: Scratch.ArgumentType.STRING,
-                                defaultValue: ''
+                                type: Scratch.ArgumentType.BOOLEAN,
+                                defaultValue: 'true'
                             }
                         }
                     },
@@ -67,7 +67,11 @@
 
         encrypt(args) {
             const crypt = new JSEncrypt();
-            crypt.setPublicKey(args.KEY);
+            if args.TYPE === "true" {
+                crypt.setPublicKey(args.KEY);
+            } else {
+                crypt.setPrivateKey(args.KEY);
+            }
             const encrypted = crypt.encrypt(args.TEXT);
             return encrypted ? btoa(encrypted) : 'Encryption failed';
         }
