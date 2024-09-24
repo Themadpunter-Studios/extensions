@@ -35,7 +35,7 @@
                             },
                             TYPE: {
                                 type: Scratch.ArgumentType.BOOLEAN,
-                                defaultValue: 'true'
+                                defaultValue: true
                             }
                         }
                     },
