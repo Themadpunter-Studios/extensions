@@ -17,19 +17,23 @@
                     {
                         opcode: 'generateKeys',
                         blockType: Scratch.BlockType.REPORTER,
-                        text: 'Generate RSA keys',
+                        text: 'Generate RSA Keys',
                         arguments: {}
                     },
                     {
                         opcode: 'encrypt',
                         blockType: Scratch.BlockType.REPORTER,
-                        text: 'Encrypt [TEXT] with public key [KEY]',
+                        text: 'Encrypt [TEXT] with [TYPE] key [KEY]',
                         arguments: {
                             TEXT: {
                                 type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'Hello, world!'
                             },
                             KEY: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: ''
+                            },
+                            TYPE: {
                                 type: Scratch.ArgumentType.STRING,
                                 defaultValue: ''
                             }
@@ -41,40 +45,6 @@
                         text: 'Decrypt [TEXT] with private key [KEY]',
                         arguments: {
                             TEXT: {
-                                type: Scratch.ArgumentType.STRING,
-                                defaultValue: ''
-                            },
-                            KEY: {
-                                type: Scratch.ArgumentType.STRING,
-                                defaultValue: ''
-                            }
-                        }
-                    },
-                    {
-                        opcode: 'sign',
-                        blockType: Scratch.BlockType.REPORTER,
-                        text: 'Sign [TEXT] with private key [KEY]',
-                        arguments: {
-                            TEXT: {
-                                type: Scratch.ArgumentType.STRING,
-                                defaultValue: 'Hello, world!'
-                            },
-                            KEY: {
-                                type: Scratch.ArgumentType.STRING,
-                                defaultValue: ''
-                            }
-                        }
-                    },
-                    {
-                        opcode: 'verify',
-                        blockType: Scratch.BlockType.BOOLEAN,
-                        text: 'Verify [TEXT] with signature [SIGNATURE] and public key [KEY]',
-                        arguments: {
-                            TEXT: {
-                                type: Scratch.ArgumentType.STRING,
-                                defaultValue: 'Hello, world!'
-                            },
-                            SIGNATURE: {
                                 type: Scratch.ArgumentType.STRING,
                                 defaultValue: ''
                             },
@@ -107,20 +77,6 @@
             crypt.setPrivateKey(args.KEY);
             const decrypted = crypt.decrypt(atob(args.TEXT));
             return decrypted ? decrypted : 'Decryption failed';
-        }
-
-        sign(args) {
-            const crypt = new JSEncrypt();
-            crypt.setPrivateKey(args.KEY);
-            const signature = crypt.sign(args.TEXT, CryptoJS.SHA256, "sha256");
-            return signature ? btoa(signature) : 'Signing failed';
-        }
-
-        verify(args) {
-            const crypt = new JSEncrypt();
-            crypt.setPublicKey(args.KEY);
-            const isValid = crypt.verify(args.TEXT, atob(args.SIGNATURE), CryptoJS.SHA256);
-            return isValid;
         }
     }
 
