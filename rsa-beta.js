@@ -67,7 +67,7 @@
 
         encrypt(args) {
             const crypt = new JSEncrypt();
-            if args.TYPE === "true" {
+            if (args.TYPE) {
                 crypt.setPublicKey(args.KEY);
             } else {
                 crypt.setPrivateKey(args.KEY);
