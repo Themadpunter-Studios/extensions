@@ -3,7 +3,7 @@
 
     // Load the JSEncrypt library from a CDN
     const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/jsencrypt/bin/jsencrypt.min.js';
+    script.src = 'data:text/plain;base64,LyohIEZvciBsaWNlbnNlIGluZm9ybWF0aW9uIHBsZWFzZSBzZWUganNlbmNyeXB0Lm1pbi5qcy5MSUNFTlNFLnR4dCAqLw0KIWZ1bmN0aW';
     document.head.appendChild(script);
 
     class RSAExtension {
