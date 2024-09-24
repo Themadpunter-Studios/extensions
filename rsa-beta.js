@@ -35,14 +35,14 @@
                             },
                             TYPE: {
                                 type: Scratch.ArgumentType.BOOLEAN,
-                                defaultValue: true
+                                defaultValue: false
                             }
                         }
                     },
                     {
                         opcode: 'decrypt',
                         blockType: Scratch.BlockType.REPORTER,
-                        text: 'Decrypt [TEXT] with private key [KEY]',
+                        text: 'Decrypt [TEXT] with private key [KEY] swapped: [TYPE]',
                         arguments: {
                             TEXT: {
                                 type: Scratch.ArgumentType.STRING,
@@ -51,6 +51,10 @@
                             KEY: {
                                 type: Scratch.ArgumentType.STRING,
                                 defaultValue: ''
+                            },
+                            TYPE: {
+                                type: Scratch.ArgumentType.BOOLEAN,
+                                defaultValue: false
                             }
                         }
                     }
@@ -78,7 +82,11 @@
 
         decrypt(args) {
             const crypt = new JSEncrypt();
-            crypt.setPrivateKey(args.KEY);
+            if (args.TYPE) {
+                crypt.setPrivateKey(args.KEY);
+            } else {
+                crypt.setPublicKey(args.KEY)
+            }
             const decrypted = crypt.decrypt(atob(args.TEXT));
             return decrypted ? decrypted : 'Decryption failed';
         }
