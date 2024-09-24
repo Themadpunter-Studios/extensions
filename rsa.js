@@ -9,7 +9,7 @@
     class RSAExtension {
         getInfo() {
             return {
-                id: 'themadpunter_rsa',
+                id: 'rsa',
                 name: 'RSA',
                 color1: '#FF0000', // Primary color (red)
                 color2: '#CC0000', // Secondary color (darker red)
