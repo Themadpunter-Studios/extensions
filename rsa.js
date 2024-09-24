@@ -49,6 +49,40 @@
                                 defaultValue: ''
                             }
                         }
+                    },
+                    {
+                        opcode: 'sign',
+                        blockType: Scratch.BlockType.REPORTER,
+                        text: 'Sign [TEXT] with private key [KEY]',
+                        arguments: {
+                            TEXT: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: 'Hello, world!'
+                            },
+                            KEY: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: ''
+                            }
+                        }
+                    },
+                    {
+                        opcode: 'verify',
+                        blockType: Scratch.BlockType.BOOLEAN,
+                        text: 'Verify [TEXT] with signature [SIGNATURE] and public key [KEY]',
+                        arguments: {
+                            TEXT: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: 'Hello, world!'
+                            },
+                            SIGNATURE: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: ''
+                            },
+                            KEY: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: ''
+                            }
+                        }
                     }
                 ]
             };
