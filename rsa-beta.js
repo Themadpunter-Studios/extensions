@@ -23,7 +23,7 @@
                     {
                         opcode: 'encrypt',
                         blockType: Scratch.BlockType.REPORTER,
-                        text: 'Encrypt [TEXT] with public key [KEY] swapped: [TYPE]',
+                        text: 'Encrypt [TEXT] with public key [KEY]',
                         arguments: {
                             TEXT: {
                                 type: Scratch.ArgumentType.STRING,
@@ -32,17 +32,13 @@
                             KEY: {
                                 type: Scratch.ArgumentType.STRING,
                                 defaultValue: ''
-                            },
-                            TYPE: {
-                                type: Scratch.ArgumentType.BOOLEAN,
-                                defaultValue: false
                             }
                         }
                     },
                     {
                         opcode: 'decrypt',
                         blockType: Scratch.BlockType.REPORTER,
-                        text: 'Decrypt [TEXT] with private key [KEY] swapped: [TYPE]',
+                        text: 'Decrypt [TEXT] with private key [KEY]',
                         arguments: {
                             TEXT: {
                                 type: Scratch.ArgumentType.STRING,
@@ -51,10 +47,40 @@
                             KEY: {
                                 type: Scratch.ArgumentType.STRING,
                                 defaultValue: ''
+                            }
+                        }
+                    },
+                    {
+                        opcode: 'sign',
+                        blockType: Scratch.BlockType.REPORTER,
+                        text: 'Sign [TEXT] with private key [KEY]',
+                        arguments: {
+                            TEXT: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: ''
                             },
-                            TYPE: {
-                                type: Scratch.ArgumentType.BOOLEAN,
-                                defaultValue: false
+                            KEY: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: ''
+                            }
+                        }
+                    },
+                    {
+                        opcode: 'verify'.
+                        blockType: Scratch.BlockType.BOOLEAN,
+                        text: 'Verify [SIGNATURE] with [TEXT] and public key [KEY]',
+                        arguments: {
+                            TEXT: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: ''
+                            },
+                            SIGNATURE : {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: ''
+                            },
+                            KEY : {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: ''
                             }
                         }
                     }
@@ -71,24 +97,28 @@
 
         encrypt(args) {
             const crypt = new JSEncrypt();
-            if (args.TYPE) {
-                crypt.setPublicKey(args.KEY);
-            } else {
-                crypt.setPrivateKey(args.KEY);
-            }
+            crypt.setPublicKey(args.KEY);
             const encrypted = crypt.encrypt(args.TEXT);
             return encrypted ? btoa(encrypted) : 'Encryption failed';
         }
 
         decrypt(args) {
             const crypt = new JSEncrypt();
-            if (args.TYPE) {
-                crypt.setPrivateKey(args.KEY);
-            } else {
-                crypt.setPublicKey(args.KEY)
-            }
+            crypt.setPrivateKey(args.KEY);
             const decrypted = crypt.decrypt(atob(args.TEXT));
             return decrypted ? decrypted : 'Decryption failed';
+        }
+        sign(args) {
+            var sign = new JSEncrypt();
+            sign.setPrivateKey(args.KEY);
+            var signature = sign.sign(args.TEXT, CryptoJS.SHA256, "sha256");
+            return signature ? signature : "Signing failed";
+        }
+        verify(args) {
+            var verify = new JSEncrypt();
+            verify.setPublicKey(args.KEY);
+            var verified = verify.verify(args.TEXT, args.SIGNATURE, CryptoJS.SHA256);
+            return verified ? verified : "Verification failed";
         }
     }
 
