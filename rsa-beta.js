@@ -117,7 +117,7 @@
         verify(args) {
             var verify = new JSEncrypt();
             verify.setPublicKey(args.KEY);
-            var verified = verify.verify(args.TEXT, args.SIGNATURE, window.crypto.subtle.digest);
+            var verified = verify.verify(args.TEXT, args.SIGNATURE, window.crypto.subtle.digest, "SHA256");
             return verified ? verified : "Verification failed";
         }
     }
