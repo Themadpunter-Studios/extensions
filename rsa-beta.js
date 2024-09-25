@@ -74,11 +74,11 @@
                                 type: Scratch.ArgumentType.STRING,
                                 defaultValue: ''
                             },
-                            SIGNATURE : {
+                            SIGNATURE: {
                                 type: Scratch.ArgumentType.STRING,
                                 defaultValue: ''
                             },
-                            KEY : {
+                            KEY: {
                                 type: Scratch.ArgumentType.STRING,
                                 defaultValue: ''
                             }
