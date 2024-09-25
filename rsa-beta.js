@@ -115,13 +115,13 @@
         sign(args) {
             var sign = new JSEncrypt();
             sign.setPrivateKey(args.KEY);
-            var signature = sign.sign(args.TEXT, CryptoJS.SHA256, "sha256");
+            var signature = sign.sign(args.TEXT, SHA256, "sha256");
             return signature ? signature : "Signing failed";
         }
         verify(args) {
             var verify = new JSEncrypt();
             verify.setPublicKey(args.KEY);
-            var verified = verify.verify(args.TEXT, args.SIGNATURE, CryptoJS.SHA256);
+            var verified = verify.verify(args.TEXT, args.SIGNATURE, SHA256);
             return verified ? verified : "Verification failed";
         }
     }
