@@ -66,7 +66,7 @@
                         }
                     },
                     {
-                        opcode: 'verify'.
+                        opcode: 'verify',
                         blockType: Scratch.BlockType.BOOLEAN,
                         text: 'Verify [SIGNATURE] with [TEXT] and public key [KEY]',
                         arguments: {
